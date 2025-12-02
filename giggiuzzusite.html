@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Nni Giggiuzzu - Panineria, Gastronomia e Churrascheria a Cinisi. Ordina online i migliori panini e piatti della tradizione siciliana.">
+    <meta name="theme-color" content="#8B4513">
+    
+    <!-- PWA Manifest Meta (Simulati) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Nni Giggiuzzu">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nnigiggiuzzu.com/">
+    <meta property="og:title" content="Nni Giggiuzzu | Il Gusto della Tradizione a Cinisi">
+    <meta property="og:description" content="Ordina online panini, gastronomia e churrascheria. Consegna a domicilio o asporto a Cinisi.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80">
+
+    <title>Nni Giggiuzzu | Panineria - Gastronomia - Churrascheria | Cinisi</title>
+
+    <!-- OPTIMIZATION 1: SEO Semantica (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Nni Giggiuzzu",
+      "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Imbriani 158",
+        "addressLocality": "Cinisi",
+        "addressRegion": "PA",
+        "postalCode": "90045",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 38.1659972,
+        "longitude": 13.1077753
+      },
+      "url": "https://nnigiggiuzzu.com",
+      "telephone": "+393273433501",
+      "priceRange": "€",
+      "servesCuisine": ["Sicilian", "Street Food", "Hamburgers"],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "11:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "11:00",
+          "closes": "24:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "12:00",
+          "closes": "23:00"
+        }
+      ],
+      "menu": "https://nnigiggiuzzu.com/#menu-container",
+      "acceptsReservations": "False"
+    }
+    </script>
+    
+    <!-- Tailwind CSS (Stable CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#D2691E',
+                        accent: '#CD853F',
+                        darkbg: '#1a100c',
+                        darkcard: '#2a1b15'
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up-fade': 'slideUpFade 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        slideUpFade: {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        /* Hero Background */
+        .hero-bg {
+            background: linear-gradient(rgba(44, 24, 16, 0.7), rgba(44, 24, 16, 0.85)), 
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80') center/cover fixed;
+        }
+        
+        /* Scrollbar Hide */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        
+        @keyframes likeBounce { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .animate-like { animation: likeBounce 0.3s ease-in-out; }
+
+        .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+        
+        /* Progress Bar Animation */
+        .progress-bar-fill { transition: width 0.5s ease-in-out; }
+
+        /* Navbar Scroll State - Forced Dark Background */
+        .scrolled {
+            background-color: #2C1810 !important; /* Solid dark brown */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Ensure navbar transition is smooth */
+        #navbar {
+            transition: background-color 0.3s ease, padding 0.3s ease;
+        }
+
+        /* Social Proof Popup Animation */
+        .social-proof-enter { transform: translateY(100%); opacity: 0; }
+        .social-proof-enter-active { transform: translateY(0); opacity: 1; transition: all 500ms ease-out; }
+        .social-proof-exit { transform: translateY(0); opacity: 1; }
+        .social-proof-exit-active { transform: translateY(100%); opacity: 0; transition: all 500ms ease-in; }
+
+        /* Category Sticky Fix */
+        .sticky-nav-active {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        html { scroll-padding-top: 140px; } /* Offset for sticky headers */
+
+        /* OPTIMIZATION 2: ScrollSpy Active State */
+        .nav-link-active {
+            background-color: #8B4513 !important; /* Primary */
+            color: white !important;
+            border-color: #8B4513 !important;
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .dark .nav-link-active {
+            background-color: #D2691E !important; /* Secondary/Amber */
+            color: white !important;
+            border-color: #D2691E !important;
+        }
+    </style>
+</head>
+<body class="bg-[#FFF8DC] text-gray-800 dark:bg-darkbg dark:text-gray-100 transition-colors duration-300 pt-10">
+
+    <!-- FEATURE 3 (Updated): Urgency Bar (Sticky Top) -->
+    <div id="fomo-bar" class="fixed top-0 w-full bg-red-600 text-white text-xs md:text-sm font-bold z-[60] py-2 text-center shadow-md flex justify-center items-center gap-2 animate-pulse-slow">
+        <span>🔥 OFFERTA LAMPO: Ordina entro <span id="countdown-timer" class="font-mono bg-white text-red-600 px-1 rounded">15:00</span> per una sorpresa!</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 bg-transparent py-2 top-8 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#" class="font-display text-2xl md:text-3xl font-bold text-white tracking-wide hover:opacity-90 transition flex items-center gap-2">
+                    🍔 Nni Giggiuzzu
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#antipasti" class="text-white/90 hover:text-amber-300 transition text-sm font-medium uppercase">Antipasti</a>
+                    <a href="#panini" class="text-white/90 hover:text-amber-300 transition text-sm font-medium uppercase">Panini</a>
+                    <a href="#primi_secondi" class="text-white/90 hover:text-amber-300 transition text-sm font-medium uppercase">Primi</a>
+                    <a href="#dolci" class="text-white/90 hover:text-amber-300 transition text-sm font-medium uppercase">Dolci</a>
+                    <a href="#bibite" class="text-white/90 hover:text-amber-300 transition text-sm font-medium uppercase">Bibite</a>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Dark Mode Toggle -->
+                    <button onclick="toggleDarkMode()" class="text-white hover:text-amber-300 p-2 rounded-full transition bg-white/10 backdrop-blur-sm">
+                        <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        <svg id="sun-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </button>
+
+                    <!-- Cart -->
+                    <button onclick="toggleCart()" id="nav-cart-btn" class="relative text-white hover:text-amber-300 transition p-1">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                        <span id="nav-cart-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm scale-0 transition-transform duration-200">0</span>
+                    </button>
+                    
+                    <!-- Mobile Hamburger -->
+                    <button id="mobile-menu-btn" class="md:hidden text-white p-1 focus:outline-none" onclick="toggleMobileMenu()">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#2C1810]/95 backdrop-blur-md border-t border-white/10 absolute w-full top-16 left-0 shadow-xl transition-all duration-300 origin-top transform scale-y-0 opacity-0">
+            <div class="flex flex-col p-4 space-y-3" id="mobile-links"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative pt-16">
+        <div class="max-w-4xl animate-fade-in w-full">
+            <div class="inline-block p-4 rounded-full bg-white/10 backdrop-blur-sm mb-4 border border-white/20">
+                <span class="text-5xl">🍴</span>
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight drop-shadow-lg">
+                Nni Giggiuzzu
+            </h1>
+            <p class="text-xl md:text-2xl text-amber-300 mb-8 font-light tracking-wide">
+                Panineria • Gastronomia • Churrascheria
+            </p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-md mx-auto relative mb-10 group">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+                <input type="text" id="menu-search" onkeyup="filterMenu()" class="block w-full pl-10 pr-3 py-4 border-none rounded-full leading-5 bg-white/90 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white shadow-xl transition-all" placeholder="Cerca il tuo panino preferito...">
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#menu-container" id="hero-order-btn" class="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white px-10 py-4 rounded-full font-bold transition transform hover:scale-105 shadow-xl">
+                    Ordina Ora
+                </a>
+                <button onclick="toggleFavoritesModal()" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-bold transition flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    I Tuoi Preferiti
+                </button>
+            </div>
+            
+            <div id="status-badge" class="mt-6 inline-block">
+                <!-- Injected by JS (Aperto/Chiuso) -->
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- Main Content -->
+    <main id="menu-container" class="max-w-7xl mx-auto px-4 py-8 space-y-24 min-h-[50vh]">
+        <!-- Menu Sections Injected by JS -->
+    </main>
+
+    <!-- Allergeni Section (Professional & Premium) -->
+    <section id="allergeni" class="max-w-7xl mx-auto px-4 pb-24 scroll-mt-24">
+        <div class="text-center mb-12">
+            <span class="text-4xl mb-4 block">⚠️</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-[#2C1810] dark:text-amber-500 mb-2">Informazioni Alimentari</h2>
+            <div class="h-1 w-20 bg-amber-500 mx-auto rounded-full mt-4"></div>
+            <p class="text-gray-500 dark:text-gray-400 mt-4 max-w-2xl mx-auto text-sm">
+                La sicurezza dei nostri clienti è fondamentale. Di seguito riportiamo la lista dettagliata degli allergeni e le informazioni relative allo stato dei prodotti, in conformità con il Reg. CE 1169/2011.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-darkcard rounded-3xl shadow-xl border border-amber-900/10 dark:border-white/5 overflow-hidden">
+            
+            <!-- Tabella Stato e Diete -->
+            <div class="p-8 bg-amber-50/50 dark:bg-black/20">
+                <h3 class="font-display text-2xl font-bold text-amber-900 dark:text-amber-400 mb-6 flex items-center gap-2">
+                    <span class="text-xl">📋</span> Legenda & Stato Prodotti
+                </h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="dietary-container">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+
+            <!-- Lista Allergeni -->
+            <div class="p-8 border-t border-amber-100 dark:border-white/10">
+                <h3 class="font-display text-2xl font-bold text-amber-900 dark:text-amber-400 mb-6 flex items-center gap-2">
+                    <span class="text-xl">🌾</span> Elenco Allergeni
+                </h3>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6" id="allergens-container">
+                    <!-- Injected by JS -->
+                </div>
+                <div class="mt-8 pt-6 border-t border-dashed border-gray-200 dark:border-white/10 text-center">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 italic">
+                        Per qualsiasi dubbio o richiesta specifica, il nostro personale è a completa disposizione. In caso di allergie o intolleranze gravi, si prega di segnalarlo esplicitamente al momento dell'ordine nelle note.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="bg-white dark:bg-darkcard py-16 border-y border-amber-900/10 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-4xl font-bold text-primary dark:text-amber-400 mb-2">Dicono di Noi</h2>
+                <div class="h-1 w-20 bg-amber-500 mx-auto rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-amber-50 dark:bg-darkbg p-6 rounded-2xl shadow-sm relative">
+                    <div class="text-amber-400 text-2xl mb-2">★★★★★</div>
+                    <p class="text-gray-600 dark:text-gray-300 italic mb-4">"Il miglior panino di Cinisi! Il Giggiuzzu è qualcosa di spaziale, consigliatissimo."</p>
+                    <div class="font-bold text-gray-800 dark:text-gray-200">- Marco R.</div>
+                </div>
+                <!-- Review 2 -->
+                <div class="bg-amber-50 dark:bg-darkbg p-6 rounded-2xl shadow-sm relative">
+                    <div class="text-amber-400 text-2xl mb-2">★★★★★</div>
+                    <p class="text-gray-600 dark:text-gray-300 italic mb-4">"Servizio a domicilio puntuale e cibo arrivato caldissimo. Bravi!"</p>
+                    <div class="font-bold text-gray-800 dark:text-gray-200">- Sofia L.</div>
+                </div>
+                <!-- Review 3 -->
+                <div class="bg-amber-50 dark:bg-darkbg p-6 rounded-2xl shadow-sm relative">
+                    <div class="text-amber-400 text-2xl mb-2">★★★★★</div>
+                    <p class="text-gray-600 dark:text-gray-300 italic mb-4">"Qualità prezzo imbattibile. Le patatine con fonduta sono una droga."</p>
+                    <div class="font-bold text-gray-800 dark:text-gray-200">- Giuseppe C.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Footer -->
+    <footer id="contatti" class="bg-[#2C1810] text-white pt-16 pb-8 relative overflow-hidden">
+        <div class="absolute top-0 w-full h-2 bg-gradient-to-r from-amber-700 via-amber-500 to-amber-700"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 mb-12">
+                <!-- Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="font-display text-4xl font-bold mb-2">Nni Giggiuzzu</h3>
+                        <p class="text-amber-400 font-medium text-lg">Il vero street food siciliano.</p>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-lg mb-4 text-amber-100 flex items-center gap-2"><span class="text-2xl">📍</span> Contatti</h4>
+                            <p class="text-white/80">Via Imbriani 158</p>
+                            <p class="text-white/80 mb-3">Cinisi (PA), 90045</p>
+                            <a href="tel:+393273433501" class="text-amber-400 font-bold hover:underline block mb-4">+39 327 343 3501</a>
+                            <div class="flex gap-4">
+                                <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#1877F2] transition">f</a>
+                                <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#E4405F] transition">Ig</a>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-4 text-amber-100 flex items-center gap-2"><span class="text-2xl">⏰</span> Orari</h4>
+                            <ul class="text-white/80 space-y-2 text-sm">
+                                <li class="flex justify-between border-b border-white/10 pb-1"><span>Lun - Ven</span><span>11:00 - 23:00</span></li>
+                                <li class="flex justify-between border-b border-white/10 pb-1"><span>Sabato</span><span>11:00 - 24:00</span></li>
+                                <li class="flex justify-between border-b border-white/10 pb-1"><span>Domenica</span><span>12:00 - 23:00</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Map Embed -->
+                <div class="h-64 lg:h-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3137.957647234854!2d13.1077753!3d38.1659972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1319ec48a975775d%3A0x8e8339599696357!2sVia%20Imbriani%2C%20158%2C%2090045%20Cinisi%20PA!5e0!3m2!1sit!2sit!4v1701234567890!5m2!1sit!2sit" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        class="grayscale hover:grayscale-0 transition duration-500">
+                    </iframe>
+                </div>
+            </div>
+            
+            <!-- PWA Banner Mock -->
+            <div class="bg-amber-900/50 p-4 rounded-xl flex items-center justify-between backdrop-blur-md mb-8 border border-white/10">
+                <div class="flex items-center gap-3">
+                    <div class="bg-white p-2 rounded-lg"><span class="text-2xl">📱</span></div>
+                    <div>
+                        <p class="font-bold text-sm">Scarica la nostra App</p>
+                        <p class="text-xs text-white/60">Ordina più velocemente dal tuo telefono</p>
+                    </div>
+                </div>
+                <button onclick="alert('Funzionalità PWA simulata: Aggiungi alla Home!')" class="bg-white text-amber-900 px-4 py-2 rounded-lg text-xs font-bold hover:bg-amber-100 transition">INSTALLA</button>
+            </div>
+
+            <div class="text-center text-xs text-white/30 pt-8 border-t border-white/10">
+                <p>&copy; 2025 Nni Giggiuzzu. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- COMPONENTS & MODALS -->
+
+    <!-- FEATURE 2: Social Proof Popup (Bottom Left) -->
+    <div id="social-proof" class="fixed bottom-20 left-4 bg-white dark:bg-darkcard p-3 rounded-xl shadow-2xl z-40 flex items-center gap-3 border border-amber-100 dark:border-white/10 transform translate-y-[200%] transition-transform duration-500 max-w-[300px]">
+        <div class="bg-green-100 text-green-600 p-2 rounded-full">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium" id="sp-name">Marco da Terrasini</p>
+            <p class="text-sm font-bold text-gray-800 dark:text-white" id="sp-action">ha appena ordinato 🍔 King Burger</p>
+        </div>
+        <button onclick="closeSocialProof()" class="absolute -top-2 -right-2 bg-gray-200 rounded-full p-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+
+    <!-- Floating Cart -->
+    <button id="floating-cart-btn" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 bg-primary text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 border-4 border-[#FFF8DC] dark:border-darkcard scale-0 transition-all duration-300 group">
+        <div class="relative">
+            <svg class="w-8 h-8 group-hover:rotate-12 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span id="float-cart-badge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold scale-0 transition-transform duration-200 border-2 border-primary">0</span>
+        </div>
+    </button>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300" onclick="toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 max-w-md w-full bg-[#FFF8DC] dark:bg-darkcard shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col h-full border-l-4 border-primary">
+        <!-- Cart Header -->
+        <div class="bg-primary text-white p-5 flex justify-between items-center shadow-none z-20 relative border-b border-white/10 shrink-0">
+            <h2 class="font-display text-xl font-bold flex items-center gap-2">🛒 Il Tuo Vassoio</h2>
+            <div class="flex gap-2">
+                <button onclick="openHistoryModal()" class="p-2 hover:bg-white/10 rounded-full transition text-xs flex items-center gap-1 bg-white/20" title="Storico Ordini">
+                    📜 Storico
+                </button>
+                <button onclick="toggleCart()" class="p-2 hover:bg-white/10 rounded-full transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+        </div>
+        
+        <!-- Cart Content -->
+        <div class="flex-1 overflow-y-auto relative">
+            
+            <!-- OPTIMIZATION 3: Fidelity Card (Retention) -->
+            <div id="fidelity-card" class="m-4 p-4 bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl text-white shadow-lg border border-amber-500/30 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl">🍔</div>
+                <div class="flex justify-between items-start mb-2 relative z-10">
+                    <div>
+                        <h3 class="font-bold text-amber-400 text-sm">GIGGIUZZU LOYALTY CARD</h3>
+                        <p class="text-xs text-gray-300">Ordina 5 volte, il 6° panino è gratis!</p>
+                    </div>
+                    <div class="bg-amber-500 text-black font-bold text-xs px-2 py-1 rounded">LIVELLO 1</div>
+                </div>
+                <!-- Stamps -->
+                <div class="flex justify-between items-center mt-3 relative z-10" id="fidelity-stamps">
+                    <!-- Injected via JS -->
+                </div>
+                <div id="fidelity-reward" class="mt-3 text-xs text-green-400 font-bold hidden bg-green-900/50 p-2 rounded text-center border border-green-500/50">
+                    🎉 OMAGGIO SBLOCCATO! Richiedilo nelle note!
+                </div>
+            </div>
+
+            <!-- Delivery Threshold Bar -->
+            <div id="free-delivery-bar" class="bg-amber-100 dark:bg-white/5 p-3 text-center border-b border-amber-200 dark:border-white/10 hidden">
+                <p class="text-xs font-bold text-amber-800 dark:text-amber-400 mb-1" id="free-delivery-text"></p>
+                <div class="w-full bg-white dark:bg-white/10 rounded-full h-2 overflow-hidden">
+                    <div id="free-delivery-progress" class="bg-green-500 h-2 rounded-full progress-bar-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Combo Badge -->
+            <div id="combo-badge" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-white p-2 text-center text-xs font-bold shadow-sm hidden animate-pulse-slow">
+                ✨ MENU COMBO ATTIVO! SCONTO 10% APPLICATO! ✨
+            </div>
+
+            <div id="cart-items" class="p-4 space-y-3"></div>
+
+            <!-- OPTIMIZATION 3: Silent Upsell In-Cart -->
+            <div id="cart-upsell" class="px-4 py-2 border-t border-dashed border-gray-200 dark:border-white/10">
+                <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">Aggiungi al volo 👇</h4>
+                <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2" id="cart-upsell-items">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+            
+            <!-- Checkout Form -->
+            <div id="checkout-form" class="p-4 border-t border-amber-200 dark:border-white/10 bg-amber-50/50 dark:bg-black/20 hidden">
+                <!-- Promo Code -->
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="promo-code" class="flex-1 bg-white dark:bg-darkbg border border-gray-200 dark:border-gray-700 rounded-lg p-2 text-sm uppercase" placeholder="Codice Sconto">
+                    <button onclick="applyPromo()" class="bg-gray-800 text-white px-3 rounded-lg text-sm font-bold">APPLICA</button>
+                </div>
+                <div id="promo-message" class="text-xs font-bold mb-3 hidden"></div>
+
+                <div class="space-y-4">
+                    <div class="flex p-1 bg-white dark:bg-darkbg border border-amber-100 dark:border-gray-700 rounded-lg shadow-sm">
+                        <button id="btn-delivery" onclick="setOrderType('delivery')" class="flex-1 py-2 px-4 rounded-md text-sm font-bold bg-primary text-white shadow-sm transition-all flex items-center justify-center gap-2">🛵 Domicilio</button>
+                        <button id="btn-pickup" onclick="setOrderType('pickup')" class="flex-1 py-2 px-4 rounded-md text-sm font-bold text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition-all flex items-center justify-center gap-2">🥡 Asporto</button>
+                    </div>
+                    <div><input type="text" id="customer-name" class="w-full bg-white dark:bg-darkbg border border-gray-200 dark:border-gray-700 rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-primary dark:text-white" placeholder="Il tuo nome *"></div>
+                    <div id="address-container"><input type="text" id="delivery-address" class="w-full bg-white dark:bg-darkbg border border-gray-200 dark:border-gray-700 rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-primary dark:text-white" placeholder="Indirizzo di Consegna *"></div>
+                    <div><input type="time" id="order-time" class="w-full bg-white dark:bg-darkbg border border-gray-200 dark:border-gray-700 rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-primary dark:text-white"></div>
+                    <div><textarea id="order-notes" rows="2" class="w-full bg-white dark:bg-darkbg border border-gray-200 dark:border-gray-700 rounded-lg p-3 text-sm outline-none resize-none dark:text-white" placeholder="Note (es. niente cipolla)..."></textarea></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sticky Footer -->
+        <div id="cart-sticky-footer" class="bg-white dark:bg-darkcard p-4 shadow-none hidden border-t-2 border-amber-100 dark:border-white/10 z-20 shrink-0 safe-bottom">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-gray-600 dark:text-gray-400 font-medium">Totale</span>
+                <div class="text-right">
+                    <span id="cart-subtotal" class="text-sm text-gray-400 line-through hidden mr-2"></span>
+                    <span id="cart-total" class="text-2xl font-display font-bold text-primary dark:text-amber-500">€0.00</span>
+                </div>
+            </div>
+            <button type="button" id="whatsapp-btn" onclick="sendToWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#1ebc57] text-white py-3.5 rounded-xl font-bold text-lg shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95 uppercase tracking-wide">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span id="whatsapp-btn-text">MANDA TUTTO A GIGGIUZZU 🍔🔥</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modals (Variants, History, Favorites) -->
+    <div id="generic-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeGenericModal()"></div>
+        <div id="generic-modal-content" class="relative bg-white dark:bg-darkcard rounded-2xl shadow-2xl max-w-sm w-full p-6 transform scale-95 opacity-0 transition-all duration-300 max-h-[80vh] overflow-y-auto">
+            <button onclick="closeGenericModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 bg-gray-100 dark:bg-white/10 rounded-full p-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            <h3 id="modal-title" class="font-display text-2xl font-bold text-primary dark:text-amber-500 mb-4 pr-8"></h3>
+            <div id="modal-body" class="space-y-3"></div>
+        </div>
+    </div>
+
+    <!-- Upsell Modal -->
+    <div id="upsell-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeUpsellModal()"></div>
+        <div id="upsell-modal-content" class="relative bg-white dark:bg-darkcard rounded-2xl shadow-2xl max-w-sm w-full p-6 transform scale-95 opacity-0 transition-all duration-300 text-center">
+            <div class="text-4xl mb-3">🍟🥤</div>
+            <h3 class="font-display text-xl font-bold text-primary dark:text-amber-500 mb-2">Completa il tuo menu!</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-6">Hai preso un panino... vuoi aggiungere anche patatine e bibita?</p>
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="addUpsellItem('a1', 1.50); closeUpsellModal()" class="bg-amber-100 dark:bg-white/10 hover:bg-amber-200 dark:hover:bg-white/20 p-3 rounded-xl transition">
+                    <div class="text-2xl mb-1">🍟</div>
+                    <div class="font-bold text-sm">Patatine</div>
+                    <div class="text-xs">Piccole €1.50</div>
+                </button>
+                <button onclick="addUpsellItem('b2', 1.00); closeUpsellModal()" class="bg-amber-100 dark:bg-white/10 hover:bg-amber-200 dark:hover:bg-white/20 p-3 rounded-xl transition">
+                    <div class="text-2xl mb-1">🥤</div>
+                    <div class="font-bold text-sm">Bibita</div>
+                    <div class="text-xs">Lattina €1.00</div>
+                </button>
+            </div>
+            <button onclick="closeUpsellModal()" class="mt-4 text-xs text-gray-400 underline">No grazie, ho già tutto</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-32 left-1/2 transform -translate-x-1/2 bg-[#2C1810] text-white px-6 py-3 rounded-full shadow-2xl z-[70] hidden items-center gap-3 transition-all duration-300 translate-y-10 opacity-0 border border-amber-500/30 w-max max-w-[90%]">
+        <span class="bg-green-500 rounded-full p-1 flex-shrink-0" id="toast-icon"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+        <span id="toast-message" class="font-medium text-sm truncate">Messaggio</span>
+    </div>
+
+    <script>
+        // --- CONFIG ---
+        const FREE_DELIVERY_THRESHOLD = 20.00;
+        const WHATSAPP_NUMBER = '393273433501';
+
+        // --- DATA ---
+        const MENU_DATA = {
+            categories: [
+                { id: 'antipasti', name: 'Antipasti', icon: '🍟' },
+                { id: 'panini', name: 'Panini', icon: '🍔' },
+                { id: 'primi_secondi', name: 'Primi & Secondi', icon: '🍝' },
+                { id: 'dolci', name: 'Dolci', icon: '🍰' },
+                { id: 'bibite', name: 'Bibite', icon: '🥤' }
+            ],
+            items: [
+                // ANTIPASTI
+                { id: 'a1', cat: 'antipasti', name: 'Patatine fritte', variants: [{l:'Piccola', p:1.50}, {l:'Media', p:2.50}, {l:'Vassoio', p:5.00}] },
+                { id: 'a2', cat: 'antipasti', name: 'Patatine porchetta e cheddar', variants: [{l:'Piccola', p:2.00}, {l:'Media', p:3.00}, {l:'Vassoio', p:7.00}] },
+                { id: 'a3', cat: 'antipasti', name: 'Patatine bacon e cheddar', variants: [{l:'Piccola', p:2.00}, {l:'Media', p:3.00}, {l:'Vassoio', p:7.00}] },
+                { id: 'a4', cat: 'antipasti', name: 'Patatine salsiccia e fonduta', variants: [{l:'Piccola', p:3.00}, {l:'Media', p:5.00}, {l:'Vassoio', p:10.00}] },
+                { id: 'a5', cat: 'antipasti', name: 'Patate al forno', variants: [{l:'Piccola', p:2.00}, {l:'Media', p:3.00}, {l:'Vassoio', p:6.00}] },
+                { id: 'a6', cat: 'antipasti', name: 'Caponata siciliana', veg: true, variants: [{l:'Piccola', p:3.00}, {l:'Media', p:5.00}, {l:'Vassoio', p:10.00}] },
+                { id: 'a7', cat: 'antipasti', name: 'Alette di pollo BBQ', desc: '5 pezzi in salsa barbecue.', price: 3.50 },
+                { id: 'a8', cat: 'antipasti', name: 'Polpette della casa', desc: '5 pz. Carni miste, prezzemolo, caciocavallo, cipolla, uova, latte, pangrattato.', price: 2.50 },
+                { id: 'a9', cat: 'antipasti', name: 'Polpettine rustiche', desc: '4 pz. Mollica, prosciutto, mozzarella, verdure.', price: 2.50 },
+                { id: 'a10', cat: 'antipasti', name: 'Speedy Pollo', desc: '5 pezzi.', price: 1.50 },
+                { id: 'a11', cat: 'antipasti', name: 'Anelli di pollo', desc: '5 pz. Aromatizzati alla cipolla.', price: 2.00 },
+                { id: 'a12', cat: 'antipasti', name: 'Panelle e Crocché', desc: 'Prezzo al pezzo.', price: 0.50 },
+
+                // DOLCI
+                { id: 'd1', cat: 'dolci', name: 'Crepes con Nutella', price: 2.50 },
+                { id: 'd2', cat: 'dolci', name: 'Crepes con pistacchio', price: 3.50 },
+                { id: 'd3', cat: 'dolci', name: 'Cassatelle siciliane', price: 1.50 },
+                { id: 'd4', cat: 'dolci', name: 'Waffel con Nutella', price: 2.50 },
+                { id: 'd5', cat: 'dolci', name: 'Waffel con pistacchio', price: 3.50 },
+                { id: 'd6', cat: 'dolci', name: 'Macedonia di frutta fresca', price: 3.00 },
+
+                // BIBITE
+                { id: 'b1', cat: 'bibite', name: 'Acqua', variants: [{l:'Nat/Friz 50cl', p:0.50}, {l:'Naturale 2L', p:1.00}] },
+                { id: 'b2', cat: 'bibite', name: 'Lattine 33cl', variants: [{l:'Coca Cola', p:1.00}, {l:'Fanta', p:1.00}, {l:'Sprite', p:1.00}, {l:'Chinotto', p:1.00}] },
+                { id: 'b3', cat: 'bibite', name: 'Pepsi 33cl', price: 1.00 },
+                { id: 'b4', cat: 'bibite', name: 'Bibita 1.5L', variants: [{l:'Coca Cola', p:2.50}, {l:'Fanta', p:2.50}, {l:'Sprite', p:2.50}] },
+                { id: 'b5', cat: 'bibite', name: 'The', variants: [{l:'Pesca', p:1.50}, {l:'Limone', p:1.50}] },
+                { id: 'b6', cat: 'bibite', name: 'Schweppes limone 18cl', price: 1.00 },
+                { id: 'b7', cat: 'bibite', name: 'Red Bull', price: 2.00 },
+                { id: 'b8', cat: 'bibite', name: 'Gold Energy Drink', price: 3.00 },
+                { id: 'b9', cat: 'bibite', name: 'Becks / Heineken 33cl', variants: [{l:'Becks', p:2.00}, {l:'Heineken', p:2.00}] },
+                { id: 'b10', cat: 'bibite', name: 'Becks / Heineken 66cl', variants: [{l:'Becks', p:3.00}, {l:'Heineken', p:3.00}] },
+                { id: 'b11', cat: 'bibite', name: 'Moretti 33cl', price: 1.50 },
+                { id: 'b12', cat: 'bibite', name: 'Moretti 66cl', price: 2.50 },
+                { id: 'b13', cat: 'bibite', name: 'Ceres 33cl', price: 2.50 },
+                { id: 'b14', cat: 'bibite', name: 'Corona 33cl', price: 2.50 },
+                { id: 'b15', cat: 'bibite', name: 'Forst 33cl', price: 1.30 },
+                { id: 'b16', cat: 'bibite', name: 'Forst 66cl', price: 2.00 },
+                { id: 'b17', cat: 'bibite', name: 'Tennent’s 33cl', price: 2.50 },
+                { id: 'b18', cat: 'bibite', name: 'Messina cristalli di sale 33cl', price: 2.50 },
+                { id: 'b19', cat: 'bibite', name: 'Vino Calice', variants: [{l:'Piccolo (Bianco/Rosso)', p:1.00}, {l:'Grande (Bianco/Rosso)', p:2.00}] },
+
+                // PANINI - FEATURE 1 (Visual Appetite)
+                { id: 'p1', cat: 'panini', name: 'Cartoccio', desc: 'Prosciutto, mozzarella.', price: 2.50 },
+                { id: 'p2', cat: 'panini', name: 'Hot Dog', desc: 'Wurstel.', price: 2.50 },
+                { id: 'p3', cat: 'panini', name: 'Solo Hamburger', desc: 'Vitello, pollo, pizzaiola.', price: 3.50 },
+                {
+  id: 'p4',
+  cat: 'panini',
+  name: 'King Burger',
+  desc: 'Hamburger, patatine, lattuga, pomodoro, cipolla saltata, cheddar.',
+  price: 6.00,
+  pop: true,
+  img: 'https://i.imgur.com/nJnlrnB.jpeg'
+},
+                { id: 'p5', cat: 'panini', name: 'Hamburger Cheese', desc: 'Hamburger, cheddar, pancetta fresca.', price: 5.00,  },
+                { id: 'p6', cat: 'panini', name: 'Bufalo Burger', desc: 'Hamburger, mozzarella di bufala, lattuga, pomodoro.', price: 6.00, pop: true, img: 'https://i.imgur.com/mgflUlI.png'  },
+                { id: 'p7', cat: 'panini', name: 'Caprese', desc: 'Pomodoro, mozzarella, olio, origano.', price: 3.00, veg: true },
+                { id: 'p8', cat: 'panini', name: 'Giggiuzzu', desc: 'Maiale sfilacciato, cheddar, pancetta croccante, cipolla caramellata.', price: 6.00, pop: true, tag: 'Signature', pop: true, img: 'https://i.imgur.com/rEu3vYA.jpeg' },
+                { id: 'p9', cat: 'panini', name: 'Chicken', desc: 'Hamburger di pollo, funghi, grana.', price: 4.50 },
+                { id: 'p10', cat: 'panini', name: 'Porcellino', desc: 'Coppietta, cipolla caramellata.', price: 3.50 },
+                { id: 'p11', cat: 'panini', name: 'Zola Burger', desc: 'Hamburger, gorgonzola, lattuga, pomodoro, patatine.', price: 6.00, pop: true, img: 'https://i.imgur.com/CInZWPm.png' },
+                { id: 'p12', cat: 'panini', name: 'Topolino', desc: 'Prosciutto, mozzarella, pomodoro, lattuga, wurstel.', price: 3.00 },
+                { id: 'p13', cat: 'panini', name: 'Salsicciotto', desc: 'Salsiccia classica, provola.', price: 4.50 },
+                { id: 'p14', cat: 'panini', name: 'Pizzaiolo', desc: 'Salsiccia pizzaiola, scamorza affumicata.', price: 4.50 },
+                { id: 'p15', cat: 'panini', name: 'Vege King', desc: 'Melanzane, zucchine, funghi saltati, pomodoro, emmenthal.', price: 5.00, veg: true, pop: true, img: 'https://i.imgur.com/fzexuG5.png' },
+                { id: 'p16', cat: 'panini', name: 'Piccantino', desc: 'Wurstel, scamorza affumicata, salame piccante.', price: 4.50, spicy: true },
+                { id: 'p17', cat: 'panini', name: 'Panino con Panelle / Crocché', price: 2.00 },
+                { id: 'p18', cat: 'panini', name: 'Ficodì', desc: 'Porchetta, cip. caram., emmenthal, marmellata di fichi d’India, salsa algerienne.', price: 6.50, pop: true, img: 'https://i.imgur.com/cFLuzjf.png' },
+                { id: 'p19', cat: 'panini', name: 'Doppio Cheeseburger', desc: '2 hamburger da 180 g, doppio cheddar, doppio bacon.', price: 12.00, pop: true, tag: 'XL', pop: true, img: 'https://i.imgur.com/5MC6oRr.png' },
+                { id: 'p20', cat: 'panini', name: 'Bronte Burger', desc: 'Hamburger, mortadella, emmenthal, pesto di pistacchi.', price: 7.00, pop: true, img: 'https://i.imgur.com/WSDa5Y6.png' },
+                { id: 'p21', cat: 'panini', name: 'Cotoletta Burger', desc: '2 hamburger panati 100 g, medaglione di primo sale panato, lattuga, pomodoro, cipolla saltata.', price: 7.00, pop: true, img: 'https://i.imgur.com/p9jngVX.png' },
+                { id: 'p22', cat: 'panini', name: 'Crispy Hot Dog', desc: 'Wurstel, cipolla croccante, cheddar, ketchup.', price: 3.50 },
+
+                // PRIMI E SECONDI
+                { id: 'ps1', cat: 'primi_secondi', name: 'Anelletti al forno', price: 4.00 },
+                { id: 'ps2', cat: 'primi_secondi', name: 'Pollo allo spiedo', price: 10.00 },
+                { id: 'ps3', cat: 'primi_secondi', name: 'Grigliata mista', desc: 'Fettina di bovino, salsiccia, fettina di pollo, puntina di suino.', price: 15.00, pop: true, img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80' }
+            ],
+            // OPTIMIZATION 3: Silent Upsell Items
+            upsell: [
+                { id: 'up1', name: 'Salsa Algerienne', price: 0.50, icon: '🌶️' },
+                { id: 'up2', name: 'Extra Bacon', price: 1.00, icon: '🥓' },
+                { id: 'up3', name: 'Cheddar Extra', price: 1.00, icon: '🧀' },
+                { id: 'up4', name: 'Acqua 50cl', price: 0.50, icon: '💧' },
+                { id: 'up5', name: 'Caffè', price: 1.00, icon: '☕' }
+            ]
+        };
+
+        const DIETARY_INFO = [
+            { icon: "❄️", title: "Congelato", desc: "Contiene alimenti congelati o surgelati all'origine" },
+            { icon: "🧊", title: "Abbattuto", desc: "Prodotto sottoposto a trattamento di bonifica preventiva tramite congelamento in conformità alle prescrizioni del reg. CE 853/2004, allegato III, sezione VIII, capitolo 3, lettera D, punto 1" },
+            { icon: "🥬", title: "Vegetariano", desc: "Indica una portata che contiene solo alimenti compatibili con la dieta vegetariana" },
+            { icon: "🌱", title: "Vegano", desc: "Indica una portata che contiene solo alimenti compatibili con la dieta vegana" },
+            { icon: "🌾", title: "Senza Glutine", desc: "Indica una portata che non contiene glutine" },
+            { icon: "🌶️", title: "Piccante", desc: "Indica una portata dal gusto piccante" },
+            { icon: "🥛", title: "Senza Lattosio", desc: "Indica una portata che non contiene lattosio" },
+            { icon: "🌿", title: "Biologico", desc: "Indica una portata che contiene solo alimenti di origine biologica" }
+        ];
+
+        const ALLERGENS_LIST = [
+            { name: "Glutine", desc: "Cereali contenenti glutine, cioè: grano, segale, orzo, avena, farro, kamut o i loro ceppi ibridati e prodotti derivati" },
+            { name: "Crostacei", desc: "Crostacei e prodotti a base di crostacei" },
+            { name: "Uova", desc: "Uova e prodotti a base di uova" },
+            { name: "Pesce", desc: "Pesce e prodotti a base di pesce" },
+            { name: "Arachidi", desc: "Arachidi e prodotti a base di arachidi" },
+            { name: "Soia", desc: "Soia e prodotti a base di soia" },
+            { name: "Latte e lattosio", desc: "Latte e prodotti a base di latte (incluso lattosio)" },
+            { name: "Frutta a guscio", desc: "Frutta a guscio (mandorle, nocciole, noci, pistacchi, etc.)" },
+            { name: "Sedano", desc: "Sedano e prodotti a base di sedano" },
+            { name: "Senape", desc: "Senape e prodotti a base di senape" },
+            { name: "Semi di sesamo", desc: "Semi di sesamo e prodotti a base di semi di sesamo" },
+            { name: "Anidride solforosa e solfiti", desc: "Anidride solforosa e solfiti in concentrazioni superiori a 10 mg/kg o 10 mg/litro" },
+            { name: "Lupini", desc: "Lupini e prodotti a base di lupini" },
+            { name: "Molluschi", desc: "Molluschi e prodotti a base di molluschi" }
+        ];
+
+        // --- STATE ---
+        let cart = [];
+        let favorites = JSON.parse(localStorage.getItem('giggiuzzuFavs')) || [];
+        let orderHistory = JSON.parse(localStorage.getItem('giggiuzzuOrders')) || [];
+        let loyaltyCount = parseInt(localStorage.getItem('giggiuzzuLoyalty')) || 0; // OPTIMIZATION 3
+        let orderType = 'delivery';
+        let discountApplied = 0; // 0 to 1 (e.g. 0.1 for 10%)
+        let upsellShown = false; // To show upsell only once
+        let shopIsOpen = true; // State for open/closed
+
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMenu(MENU_DATA.items);
+            renderAllergens();
+            renderMobileLinks();
+            updateCartUI(); // Initialize UI state
+            checkTheme();
+            startSocialProof(); // FEATURE 2
+            startTimer(); // FEATURE 3
+            checkOpeningHours(); // OPTIMIZATION 1
+            renderLoyaltyCard(); // OPTIMIZATION 3
+            initScrollSpy(); // OPTIMIZATION 2
+            
+            // Re-check opening hours every minute
+            setInterval(checkOpeningHours, 60000);
+        });
+
+        // --- OPTIMIZATION 2: SCROLL SPY ---
+        function initScrollSpy() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navContainer = document.getElementById('sticky-nav-container');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        // Update Links
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('data-target') === id) {
+                                link.classList.add('nav-link-active');
+                                link.classList.remove('bg-white', 'dark:bg-white/10');
+                                
+                                // Auto-scroll nav container
+                                const offsetLeft = link.offsetLeft - 20; // Margin
+                                navContainer.scrollTo({ left: offsetLeft, behavior: 'smooth' });
+                            } else {
+                                link.classList.remove('nav-link-active');
+                                link.classList.add('bg-white', 'dark:bg-white/10');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.5, rootMargin: "-10% 0px -40% 0px" });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // --- OPTIMIZATION 1: OPENING HOURS ---
+        function checkOpeningHours() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Domenica, 1 = Lunedì, ...
+            const hour = now.getHours();
+            const minutes = now.getMinutes();
+            const time = hour + (minutes / 60); // Orario decimale (es. 14:30 = 14.5)
+
+            // Configurazione Orari (Basata sul tuo HTML footer)
+            // Lun-Ven: 11:00 - 23:00 | Sab: 11:00 - 24:00 | Dom: 12:00 - 23:00
+            let isOpen = false;
+            let openingMsg = "";
+
+            if (day >= 1 && day <= 5) { // Lun - Ven
+                isOpen = time >= 11 && time < 23;
+                openingMsg = "Lun-Ven 11:00 - 23:00";
+            } else if (day === 6) { // Sabato
+                isOpen = time >= 11 && time < 24;
+                openingMsg = "Sabato 11:00 - 24:00";
+            } else if (day === 0) { // Domenica
+                isOpen = time >= 12 && time < 23;
+                openingMsg = "Domenica 12:00 - 23:00";
+            }
+
+            shopIsOpen = isOpen; // Update global state
+            const statusBadge = document.getElementById('status-badge');
+            const cartBtn = document.getElementById('whatsapp-btn');
+            const heroBtn = document.getElementById('hero-order-btn');
+
+            if (!isOpen) {
+                // Remove existing banner if present to avoid dupes
+                const existingBanner = document.getElementById('closed-banner');
+                if(!existingBanner) {
+                    const closedBanner = document.createElement('div');
+                    closedBanner.id = 'closed-banner';
+                    closedBanner.className = "fixed bottom-0 left-0 w-full bg-gray-900 text-white text-center py-4 z-[100] font-bold border-t-4 border-red-500 shadow-2xl animate-slide-up-fade";
+                    closedBanner.innerHTML = `😴 SIAMO CHIUSI<br><span class="text-xs font-normal text-gray-400">Riapriamo: ${openingMsg}</span>`;
+                    document.body.appendChild(closedBanner);
+                    // Add padding to body so banner doesn't cover content
+                    document.body.style.paddingBottom = "80px"; 
+                }
+
+                // Disabilita tasto carrello WhatsApp
+                if(cartBtn) {
+                    cartBtn.disabled = true;
+                    cartBtn.classList.add('opacity-50', 'cursor-not-allowed', 'grayscale');
+                    document.getElementById('whatsapp-btn-text').textContent = "CHIUSI 😴";
+                }
+                
+                // Status Badge in Hero
+                if(statusBadge) {
+                    statusBadge.innerHTML = `<span class="bg-red-600 text-white px-4 py-2 rounded-full font-bold shadow-lg border-2 border-white/20">CHIUSO ORA 😴</span>`;
+                }
+
+            } else {
+                // If Open, remove banner and enable buttons
+                const existingBanner = document.getElementById('closed-banner');
+                if(existingBanner) {
+                    existingBanner.remove();
+                    document.body.style.paddingBottom = "0";
+                }
+
+                if(cartBtn) {
+                    cartBtn.disabled = false;
+                    cartBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'grayscale');
+                    document.getElementById('whatsapp-btn-text').textContent = "MANDA TUTTO A GIGGIUZZU 🍔🔥";
+                }
+                
+                if(statusBadge) {
+                    statusBadge.innerHTML = `<span class="bg-green-500 text-white px-4 py-2 rounded-full font-bold shadow-lg border-2 border-white/20 animate-pulse">APERTO ORA 👨‍🍳</span>`;
+                }
+            }
+        }
+
+        // --- FEATURE 3: Urgency Timer ---
+        function startTimer() {
+            let timeLeft = 15 * 60; // 15 minutes in seconds
+            const timerElement = document.getElementById('countdown-timer');
+            
+            const timerInterval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                
+                if(timerElement) timerElement.textContent = `${minutes}:${seconds}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    if(timerElement) timerElement.textContent = "SCADUTA";
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        // --- FEATURE 2: Social Proof Logic ---
+        const fakeOrders = [
+            { name: "Marco da Terrasini", item: "King Burger 🍔" },
+            { name: "Giulia da Cinisi", item: "Patatine Cheddar 🍟" },
+            { name: "Salvo da Villagrazia", item: "Grigliata Mista 🍖" },
+            { name: "Francesca da Carini", item: "Giggiuzzu 🥪" },
+            { name: "Giuseppe da Terrasini", item: "Pollo allo Spiedo 🍗" }
+        ];
+
+        function startSocialProof() {
+            const popup = document.getElementById('social-proof');
+            const nameEl = document.getElementById('sp-name');
+            const actionEl = document.getElementById('sp-action');
+
+            // Show random popup every 15-30 seconds
+            setInterval(() => {
+                const randomOrder = fakeOrders[Math.floor(Math.random() * fakeOrders.length)];
+                if(nameEl) nameEl.textContent = randomOrder.name;
+                if(actionEl) actionEl.textContent = `ha appena ordinato ${randomOrder.item}`;
+                
+                if(popup) {
+                    popup.classList.remove('translate-y-[200%]');
+                    setTimeout(() => {
+                        popup.classList.add('translate-y-[200%]');
+                    }, 5000); // Stay visible for 5s
+                }
+            }, 20000); // Loop every 20s
+        }
+
+        function closeSocialProof() {
+            const popup = document.getElementById('social-proof');
+            if(popup) popup.classList.add('hidden');
+        }
+
+
+        // --- THEME ---
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcons(isDark);
+        }
+        function checkTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                updateThemeIcons(true);
+            } else {
+                updateThemeIcons(false);
+            }
+        }
+        function updateThemeIcons(isDark) {
+            const moon = document.getElementById('moon-icon');
+            const sun = document.getElementById('sun-icon');
+            if (moon) moon.classList.toggle('hidden', isDark);
+            if (sun) sun.classList.toggle('hidden', !isDark);
+        }
+
+        // --- RENDER ---
+        function renderMenu(items) {
+            const container = document.getElementById('menu-container');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            MENU_DATA.categories.forEach(cat => {
+                const catItems = items.filter(i => i.cat === cat.id);
+                if (catItems.length === 0) return;
+
+                const section = document.createElement('section');
+                section.id = cat.id;
+                section.className = "scroll-mt-36"; // Increased offset for sticky navs
+                section.innerHTML = `
+                    <div class="mb-6 flex items-center gap-3">
+                        <span class="text-3xl bg-white dark:bg-white/10 p-2 rounded-full shadow-sm border border-amber-100 dark:border-white/5">${cat.icon}</span>
+                        <h2 class="font-display text-3xl font-bold text-primary dark:text-amber-500">${cat.name}</h2>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="grid-${cat.id}"></div>
+                `;
+                container.appendChild(section);
+                
+                const grid = section.querySelector(`#grid-${cat.id}`);
+                catItems.forEach(item => grid.innerHTML += renderCard(item));
+            });
+        }
+
+        function renderCard(item) {
+            const isFav = favorites.includes(item.id);
+            const favClass = isFav ? 'text-red-500 fill-current' : 'text-gray-300 dark:text-gray-600';
+            
+            let priceHTML = '';
+            let btnAction = '';
+            
+            if(item.variants) {
+                const minP = Math.min(...item.variants.map(v => v.p));
+                priceHTML = `<span class="text-xs text-gray-500 dark:text-gray-400">da</span> <span class="font-bold text-lg text-primary dark:text-amber-500">€${minP.toFixed(2)}</span>`;
+                btnAction = `openVariantModal('${item.id}')`;
+            } else {
+                if(item.oldPrice) {
+                    priceHTML = `<span class="text-xs text-gray-400 line-through mr-1">€${item.oldPrice.toFixed(2)}</span><span class="font-bold text-lg text-red-500">€${item.price.toFixed(2)}</span>`;
+                } else {
+                    priceHTML = `<span class="font-bold text-lg text-primary dark:text-amber-500">€${item.price.toFixed(2)}</span>`;
+                }
+                btnAction = `addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, null, '${item.cat}')`;
+            }
+
+            // FEATURE 1: Image Logic
+            let imageHTML = '';
+            if (item.img) {
+                imageHTML = `<div class="h-40 w-full rounded-t-2xl overflow-hidden mb-3"><img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" loading="lazy"></div>`;
+            }
+
+            return `
+            <div class="menu-card bg-white dark:bg-darkcard rounded-2xl p-0 flex flex-col h-full relative group border dark:border-white/5 overflow-hidden">
+                <div class="absolute top-4 right-4 z-10">
+                    <button onclick="toggleFavorite('${item.id}', this)" class="bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-sm hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5 ${favClass} transition-colors" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </button>
+                </div>
+                ${item.tag ? `<div class="absolute top-4 left-4 bg-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 uppercase tracking-wide">${item.tag}</div>` : ''}
+                
+                ${imageHTML}
+                
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-gray-900 dark:text-white leading-tight text-lg">${item.name}</h3>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 italic flex-grow">${item.desc || ''}</p>
+                    
+                    <div class="flex justify-between items-center mt-auto pt-3 border-t border-dashed border-gray-100 dark:border-white/10">
+                        <div>${priceHTML}</div>
+                        <button onclick="${btnAction}" class="bg-amber-50 dark:bg-white/10 hover:bg-primary hover:text-white dark:hover:bg-amber-600 text-primary dark:text-amber-500 font-bold py-2 px-4 rounded-xl transition-all text-sm flex items-center gap-1 shadow-sm">
+                            Aggiungi <span class="text-lg leading-none">+</span>
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderAllergens() {
+            // Dietary Info
+            const dietaryContainer = document.getElementById('dietary-container');
+            if (dietaryContainer) {
+                dietaryContainer.innerHTML = '';
+                DIETARY_INFO.forEach(d => {
+                    const div = document.createElement('div');
+                    div.className = "flex flex-col items-center text-center p-4 bg-white dark:bg-white/10 rounded-xl shadow-sm border border-amber-50 dark:border-white/5 hover:border-amber-200 transition-colors";
+                    div.innerHTML = `
+                        <span class="text-4xl mb-3">${d.icon}</span>
+                        <h4 class="font-bold text-amber-900 dark:text-amber-400 mb-2">${d.title}</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-300 leading-snug">${d.desc}</p>
+                    `;
+                    dietaryContainer.appendChild(div);
+                });
+            }
+
+            // Allergens List
+            const allergensContainer = document.getElementById('allergens-container');
+            if (allergensContainer) {
+                allergensContainer.innerHTML = '';
+                ALLERGENS_LIST.forEach(a => {
+                    const div = document.createElement('div');
+                    div.className = "flex items-start gap-3 p-3 rounded-lg hover:bg-amber-50 dark:hover:bg-white/5 transition-colors";
+                    div.innerHTML = `
+                        <div class="mt-1 min-w-[6px] h-[6px] rounded-full bg-amber-500"></div>
+                        <div>
+                            <span class="font-bold text-gray-800 dark:text-gray-200 block text-sm mb-1">${a.name}</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 leading-tight block">${a.desc}</span>
+                        </div>
+                    `;
+                    allergensContainer.appendChild(div);
+                });
+            }
+        }
+
+        function renderMobileLinks() {
+            const container = document.getElementById('mobile-links');
+            MENU_DATA.categories.forEach(cat => {
+                container.innerHTML += `<a href="#${cat.id}" class="text-white/80 hover:text-white py-2 text-lg font-medium border-b border-white/5" onclick="toggleMobileMenu()" role="menuitem">${cat.icon} ${cat.name}</a>`;
+            });
+            container.innerHTML += `<a href="#allergeni" class="text-white/80 hover:text-white py-2 text-lg font-medium" onclick="toggleMobileMenu()" role="menuitem">⚠️ Allergeni</a>`;
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const isOpen = !menu.classList.contains('hidden');
+            
+            if (isOpen) {
+                menu.classList.remove('scale-y-100', 'opacity-100');
+                menu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            } else {
+                menu.classList.remove('hidden');
+                setTimeout(() => menu.classList.add('scale-y-100', 'opacity-100'), 10);
+                menu.classList.remove('scale-y-0', 'opacity-0');
+            }
+        }
+
+        // --- OPTIMIZATION 3: LOYALTY CARD ---
+        function renderLoyaltyCard() {
+            const stampsContainer = document.getElementById('fidelity-stamps');
+            const rewardMsg = document.getElementById('fidelity-reward');
+            stampsContainer.innerHTML = '';
+            
+            // Limit to 5 for Level 1
+            const count = Math.min(loyaltyCount, 5);
+            
+            for (let i = 1; i <= 5; i++) {
+                const isEarned = i <= count;
+                stampsContainer.innerHTML += `
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 ${isEarned ? 'bg-amber-500 border-amber-500 text-black' : 'border-gray-600 bg-gray-800 text-gray-600'} font-bold transition-all duration-500">
+                        ${isEarned ? '★' : i}
+                    </div>
+                `;
+            }
+
+            if (count >= 5) {
+                rewardMsg.classList.remove('hidden');
+                rewardMsg.classList.add('block', 'animate-pulse');
+            } else {
+                rewardMsg.classList.add('hidden');
+            }
+        }
+
+        function incrementLoyalty() {
+            loyaltyCount++;
+            if (loyaltyCount > 5) loyaltyCount = 0; // Reset after reward (simple logic)
+            localStorage.setItem('giggiuzzuLoyalty', loyaltyCount);
+            renderLoyaltyCard();
+        }
+
+        // --- CART & DISCOUNT ---
+        function addToCart(name, price, variantLabel = null, category = null) {
+            // CHECK OPENING HOURS FIRST
+            if (!shopIsOpen) {
+                showToast("Siamo chiusi! 😴");
+                return;
+            }
+
+            const finalName = variantLabel ? `${name} (${variantLabel})` : name;
+            const existing = cart.find(i => i.name === finalName);
+            if (existing) existing.qty++; else cart.push({ name: finalName, price: price, qty: 1, cat: category });
+            
+            // Check Upsell Logic (Smart Cross-Sell)
+            if (!upsellShown && (category === 'panini' || category === 'primi_secondi')) {
+                const hasSide = cart.some(i => i.name.toLowerCase().includes('patatine') || i.cat === 'antipasti');
+                const hasDrink = cart.some(i => i.cat === 'bibite');
+                
+                if (!hasSide || !hasDrink) {
+                    openUpsellModal();
+                    upsellShown = true;
+                }
+            }
+
+            updateCartUI();
+            showToast('Aggiunto al vassoio!');
+            animateCartBtn();
+        }
+
+        function addUpsellItem(id, price) {
+            const item = MENU_DATA.items.find(i => i.id === id);
+            if(item) {
+                // If variant needed, usually we pick standard. For fries "Piccola".
+                const name = item.id === 'a1' ? 'Patatine fritte (Piccola)' : 'Lattine 33cl';
+                addToCart(name, price, null, item.cat);
+            } else {
+                // Check if it is a silent upsell item
+                const upsell = MENU_DATA.upsell.find(u => u.id === id);
+                if(upsell) {
+                    addToCart(upsell.name, upsell.price, null, 'upsell');
+                }
+            }
+        }
+
+        function updateCartUI() {
+            localStorage.setItem('nniGiggiuzzuCart', JSON.stringify(cart));
+            const itemsCont = document.getElementById('cart-items');
+            const emptyState = document.getElementById('cart-sticky-footer');
+            const form = document.getElementById('checkout-form');
+            const floatBtn = document.getElementById('floating-cart-btn');
+            
+            let subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            
+            // Automatic Combo Discount Logic
+            const hasMain = cart.some(i => i.cat === 'panini' || i.cat === 'primi_secondi');
+            const hasDrink = cart.some(i => i.cat === 'bibite');
+            const hasFries = cart.some(i => i.name.toLowerCase().includes('patatine'));
+            const comboBadge = document.getElementById('combo-badge');
+
+            if(hasMain && hasDrink && hasFries) {
+                discountApplied = 0.10; // 10%
+                if (comboBadge) comboBadge.classList.remove('hidden');
+            } else {
+                discountApplied = 0;
+                if (comboBadge) comboBadge.classList.add('hidden');
+            }
+
+            let total = subtotal * (1 - discountApplied);
+
+            // Free Delivery Logic
+            const deliveryBar = document.getElementById('free-delivery-bar');
+            const deliveryText = document.getElementById('free-delivery-text');
+            const deliveryProgress = document.getElementById('free-delivery-progress');
+            
+            if (deliveryBar && subtotal > 0 && subtotal < FREE_DELIVERY_THRESHOLD) {
+                deliveryBar.classList.remove('hidden');
+                const remaining = (FREE_DELIVERY_THRESHOLD - subtotal).toFixed(2);
+                const percent = (subtotal / FREE_DELIVERY_THRESHOLD) * 100;
+                deliveryText.innerHTML = `Mancano <b>€${remaining}</b> per la consegna GRATIS! 🛵`;
+                deliveryProgress.style.width = `${percent}%`;
+            } else if (deliveryBar && subtotal >= FREE_DELIVERY_THRESHOLD) {
+                deliveryBar.classList.remove('hidden');
+                deliveryText.innerHTML = `🎉 Consegna GRATUITA sbloccata! 🎉`;
+                deliveryProgress.style.width = `100%`;
+            } else if (deliveryBar) {
+                deliveryBar.classList.add('hidden');
+            }
+
+            const navBadge = document.getElementById('nav-cart-badge');
+            const floatBadge = document.getElementById('float-cart-badge');
+            const qty = cart.reduce((a, b) => a + b.qty, 0);
+            
+            if (navBadge) {
+                navBadge.textContent = qty;
+                if (qty > 0) navBadge.classList.remove('scale-0'); else navBadge.classList.add('scale-0');
+            }
+            if (floatBadge) {
+                floatBadge.textContent = qty;
+                if (qty > 0) floatBadge.classList.remove('scale-0'); else floatBadge.classList.add('scale-0');
+            }
+
+            if (itemsCont) {
+                if (cart.length === 0) {
+                    itemsCont.innerHTML = `<div class="text-center py-10 opacity-50"><p class="text-xl">Vassoio vuoto 😢</p></div>`;
+                    if (emptyState) emptyState.classList.add('hidden');
+                    if (form) form.classList.add('hidden');
+                    if (floatBtn) floatBtn.classList.add('scale-0');
+                } else {
+                    if (emptyState) emptyState.classList.remove('hidden');
+                    if (form) form.classList.remove('hidden');
+                    if (floatBtn) floatBtn.classList.remove('scale-0');
+                    
+                    itemsCont.innerHTML = cart.map((item, idx) => `
+                        <div class="flex justify-between items-center bg-white dark:bg-white/5 p-3 rounded-xl border border-gray-100 dark:border-white/10">
+                            <div>
+                                <div class="font-bold text-sm dark:text-white leading-tight">${item.name}</div>
+                                <div class="text-xs text-primary dark:text-amber-500 font-bold mt-1">€${item.price.toFixed(2)}</div>
+                            </div>
+                            <div class="flex items-center gap-2 bg-gray-100 dark:bg-black/40 rounded-lg p-1">
+                                <button onclick="updateQty(${idx}, -1)" class="w-6 h-6 flex items-center justify-center text-primary dark:text-white font-bold">-</button>
+                                <span class="text-sm font-bold w-4 text-center dark:text-white">${item.qty}</span>
+                                <button onclick="updateQty(${idx}, 1)" class="w-6 h-6 flex items-center justify-center text-primary dark:text-white font-bold">+</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // OPTIMIZATION 3: Render Silent Upsell
+            const upsellCont = document.getElementById('cart-upsell-items');
+            if(upsellCont && MENU_DATA.upsell) {
+                upsellCont.innerHTML = MENU_DATA.upsell.map(u => `
+                    <button onclick="addUpsellItem('${u.id}', ${u.price})" class="flex-shrink-0 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2 text-left min-w-[100px] hover:bg-amber-50 dark:hover:bg-white/10 transition">
+                        <div class="text-xl mb-1">${u.icon}</div>
+                        <div class="text-xs font-bold text-gray-800 dark:text-white truncate">${u.name}</div>
+                        <div class="text-xs text-primary dark:text-amber-500 font-bold">+€${u.price.toFixed(2)}</div>
+                    </button>
+                `).join('');
+            }
+
+            const totalEl = document.getElementById('cart-total');
+            const subEl = document.getElementById('cart-subtotal');
+            
+            if (totalEl) totalEl.textContent = `€${total.toFixed(2)}`;
+            if (subEl) {
+                if(discountApplied > 0) {
+                    subEl.textContent = `€${subtotal.toFixed(2)}`;
+                    subEl.classList.remove('hidden');
+                } else {
+                    subEl.classList.add('hidden');
+                }
+            }
+        }
+
+        function updateQty(idx, change) {
+            cart[idx].qty += change;
+            if (cart[idx].qty <= 0) cart.splice(idx, 1);
+            updateCartUI();
+        }
+
+        function applyPromo() {
+            const codeEl = document.getElementById('promo-code');
+            const msg = document.getElementById('promo-message');
+            if (!codeEl || !msg) return;
+
+            const code = codeEl.value.toUpperCase();
+            
+            if (code === 'GIGGIUZZU10') {
+                discountApplied = 0.10;
+                msg.textContent = "Sconto 10% applicato! 🎉";
+                msg.className = "text-xs font-bold mb-3 text-green-600 block";
+            } else {
+                discountApplied = 0;
+                msg.textContent = "Codice non valido ❌";
+                msg.className = "text-xs font-bold mb-3 text-red-500 block";
+            }
+            updateCartUI();
+        }
+
+        // --- HISTORY ---
+        function saveOrder() {
+            const totalEl = document.getElementById('cart-total');
+            if (!totalEl) return;
+            const newOrder = {
+                date: new Date().toLocaleDateString(),
+                items: [...cart],
+                total: totalEl.textContent
+            };
+            orderHistory.unshift(newOrder);
+            if(orderHistory.length > 5) orderHistory.pop(); // Keep last 5
+            localStorage.setItem('giggiuzzuOrders', JSON.stringify(orderHistory));
+            
+            // Increment Loyalty
+            incrementLoyalty();
+        }
+
+        function openHistoryModal() {
+            const modal = document.getElementById('generic-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            const content = document.getElementById('generic-modal-content');
+            
+            title.textContent = "I Tuoi Ultimi Ordini 📜";
+            body.innerHTML = '';
+
+            if(orderHistory.length === 0) {
+                body.innerHTML = '<p class="text-center text-gray-500 py-4">Nessun ordine recente.</p>';
+            } else {
+                orderHistory.forEach(order => {
+                    const summary = order.items.map(i => `${i.qty}x ${i.name}`).join(', ');
+                    const div = document.createElement('div');
+                    div.className = "p-3 bg-gray-50 dark:bg-white/5 rounded-lg border border-gray-100 dark:border-white/10 text-sm";
+                    div.innerHTML = `
+                        <div class="flex justify-between font-bold dark:text-white mb-1">
+                            <span>${order.date}</span>
+                            <span>${order.total}</span>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs truncate">${summary}</p>
+                        <button onclick="reorder('${encodeURIComponent(JSON.stringify(order.items))}')" class="mt-2 text-primary dark:text-amber-500 text-xs font-bold underline">Ordina di nuovo</button>
+                    `;
+                    body.appendChild(div);
+                });
+            }
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => content.classList.remove('scale-95', 'opacity-0'), 10);
+        }
+
+        function reorder(itemsStr) {
+            const items = JSON.parse(decodeURIComponent(itemsStr));
+            cart = items; // Replace cart or append? Replace simplest.
+            updateCartUI();
+            closeGenericModal();
+            toggleCart();
+            showToast("Ordine ricaricato!");
+        }
+
+        // --- UTILS ---
+        function toggleCart() {
+            const overlay = document.getElementById('cart-overlay');
+            const sidebar = document.getElementById('cart-sidebar');
+            const isClosed = sidebar.classList.contains('translate-x-full');
+            if (isClosed) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                sidebar.classList.remove('translate-x-full');
+            } else {
+                overlay.classList.add('opacity-0');
+                sidebar.classList.add('translate-x-full');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function openVariantModal(itemId) {
+            const item = MENU_DATA.items.find(i => i.id === itemId);
+            const modal = document.getElementById('generic-modal');
+            const body = document.getElementById('modal-body');
+            const content = document.getElementById('generic-modal-content');
+            document.getElementById('modal-title').textContent = item.name;
+            
+            body.innerHTML = item.variants.map(v => `
+                <button onclick="addToCart('${item.name}', ${v.p}, '${v.l}', '${item.cat}'); closeGenericModal()" 
+                    class="w-full flex justify-between items-center p-4 rounded-xl border-2 border-transparent bg-amber-50 dark:bg-white/5 hover:border-primary dark:hover:border-amber-500 transition group text-left">
+                    <span class="font-medium text-gray-800 dark:text-white">${v.l}</span>
+                    <span class="font-bold text-primary dark:text-amber-500">€${v.p.toFixed(2)}</span>
+                </button>
+            `).join('');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => content.classList.remove('scale-95', 'opacity-0'), 10);
+        }
+
+        function closeGenericModal() {
+            const content = document.getElementById('generic-modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                document.getElementById('generic-modal').classList.remove('flex');
+                document.getElementById('generic-modal').classList.add('hidden');
+            }, 200);
+        }
+
+        function openUpsellModal() {
+            const modal = document.getElementById('upsell-modal');
+            const content = document.getElementById('upsell-modal-content');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => content.classList.remove('scale-95', 'opacity-0'), 10);
+        }
+
+        function closeUpsellModal() {
+            const content = document.getElementById('upsell-modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                document.getElementById('upsell-modal').classList.remove('flex');
+                document.getElementById('upsell-modal').classList.add('hidden');
+            }, 200);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            if (t) {
+                document.getElementById('toast-message').textContent = msg;
+                t.classList.remove('hidden', 'translate-y-10', 'opacity-0');
+                t.classList.add('flex', 'translate-y-0', 'opacity-100');
+                setTimeout(() => { t.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => t.classList.add('hidden'), 300); }, 2500);
+            }
+        }
+
+        function animateCartBtn() {
+            const btn = document.getElementById('floating-cart-btn');
+            const badge = document.getElementById('float-cart-badge');
+            if (btn && badge) {
+                btn.classList.add('scale-110'); badge.classList.add('scale-125');
+                setTimeout(() => { btn.classList.remove('scale-110'); badge.classList.remove('scale-125'); }, 200);
+            }
+        }
+
+        function sendToWhatsApp() {
+            // DOUBLE CHECK OPENING HOURS
+            if (!shopIsOpen) {
+                showToast("Siamo chiusi! Riprova negli orari di apertura 😴");
+                return;
+            }
+
+            if (cart.length === 0) return;
+            const nameEl = document.getElementById('customer-name');
+            const addressEl = document.getElementById('delivery-address');
+            
+            if (!nameEl || !addressEl) return;
+
+            const name = nameEl.value.trim();
+            const address = addressEl.value.trim();
+            
+            if (!name) { showToast("Inserisci il nome!"); return; }
+            if (orderType === 'delivery' && !address) { showToast("Inserisci l'indirizzo!"); return; }
+
+            saveOrder(); // Save to history & Increment Loyalty
+
+            let msg = `*NUOVO ORDINE - Nni Giggiuzzu*\n--------------------------------\n*Cliente:* ${name}\n*Tipo:* ${orderType === 'delivery' ? 'DOMICILIO 🛵' : 'ASPORTO 🥡'}\n`;
+            if (orderType === 'delivery') msg += `*Indirizzo:* ${address}\n`;
+            
+            if(loyaltyCount >= 5) {
+                msg += `*OMAGGIO FEDELTÀ RICHIESTO* 🎁\n`;
+            }
+
+            msg += `--------------------------------\n\n*IL TUO VASSOIO:*\n`;
+            cart.forEach(i => msg += `- ${i.qty}x ${i.name}\n`);
+            
+            if (discountApplied > 0) {
+                msg += `\n🎁 *SCONTO COMBO APPLICATO!*`;
+            }
+            
+            const totalEl = document.getElementById('cart-total');
+            if (totalEl) msg += `\n*TOTALE: ${totalEl.textContent}*`;
+            
+            window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+        }
+
+        function setOrderType(type) {
+            orderType = type;
+            const btnD = document.getElementById('btn-delivery');
+            const btnP = document.getElementById('btn-pickup');
+            const addr = document.getElementById('address-container');
+            
+            if (!btnD || !btnP || !addr) return;
+
+            const active = "bg-primary text-white shadow-sm";
+            const inactive = "text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5";
+            
+            if (type === 'delivery') {
+                btnD.className = `flex-1 py-2 px-4 rounded-md text-sm font-bold flex items-center justify-center gap-2 transition-all ${active}`;
+                btnP.className = `flex-1 py-2 px-4 rounded-md text-sm font-bold flex items-center justify-center gap-2 transition-all ${inactive}`;
+                addr.classList.remove('hidden');
+            } else {
+                btnP.className = `flex-1 py-2 px-4 rounded-md text-sm font-bold flex items-center justify-center gap-2 transition-all ${active}`;
+                btnD.className = `flex-1 py-2 px-4 rounded-md text-sm font-bold flex items-center justify-center gap-2 transition-all ${inactive}`;
+                addr.classList.add('hidden');
+            }
+        }
+        
+        // Helper for closing specific modals
+        function closeSizeModal() { closeGenericModal(); } // Legacy mapping
+
+        // Scroll Handlers
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            const stickyCats = document.getElementById('sticky-cats');
+            
+            if (window.scrollY > 50) {
+                if (nav) {
+                    nav.classList.add('scrolled', 'py-0');
+                    nav.classList.remove('py-2');
+                }
+                if (stickyCats) {
+                    stickyCats.classList.add('sticky-nav-active');
+                }
+            } else {
+                if (nav) {
+                    nav.classList.remove('scrolled', 'py-0');
+                    nav.classList.add('py-2');
+                }
+                if (stickyCats) {
+                    stickyCats.classList.remove('sticky-nav-active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
